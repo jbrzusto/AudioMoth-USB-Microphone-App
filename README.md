@@ -1,6 +1,8 @@
 # AudioMoth-USB-Microphone-App
 An Electron-based application capable of configuring the functionality of the AudioMoth-USB-Microphone firmware.
 
+Compatible with the [AudioMoth-USB-Microphone](https://github.com/OpenAcousticDevices/AudioMoth-USB-Microphone-App) firmware.
+
 ### Usage ###
 Once the repository has been cloned, you must either have electron-builder installed globally, or get it for the app specifically by running:
 ```
