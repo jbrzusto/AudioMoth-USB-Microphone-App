@@ -1,0 +1,86 @@
+{
+  "name": "AudioMoth-Mic",
+  "version": "1.0.0",
+  "description": "The configuration app for the AudioMoth USB microphone.",
+  "main": "main.js",
+  "author": "openacousticdevices.info",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/OpenAcousticDevices/AudioMoth-USB-Microphone-App.git"
+  },
+  "scripts": {
+    "postinstall": "install-app-deps",
+    "start": "electron .",
+    "dist": "node builder.js"
+  },
+  "build": {
+    "asar": {
+      "smartUnpack": true
+    },
+    "appId": "info.openacousticdevices.audiomothusbmicrophoneapp",
+    "mac": {
+      "hardenedRuntime": true,
+      "entitlements": "build/entitlements.mac.inherit.plist",
+      "target": "dmg"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 430,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "artifactName": "AudioMothUSBMicrophoneAppSetup${version}.dmg"
+    },
+    "win": {
+      "target": "nsis",
+      "icon": "build/icon.ico"
+    },
+    "nsis": {
+      "createDesktopShortcut": true,
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "AudioMothUSBMicrophoneAppSetup${version}.exe",
+      "shortcutName": "AudioMoth USB Microphone App",
+      "uninstallDisplayName": "AudioMoth USB Microphone App ${version}"
+    },
+    "linux": {
+      "icon": "build/",
+      "category": "Utility"
+    }
+  },
+  "devDependencies": {
+    "electron": "8.5.2",
+    "electron-builder": "^22.11.7",
+    "eslint": "^7.27.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-standard": "^4.0.2"
+  },
+  "dependencies": {
+    "audiomoth-hid": "^2.1.0",
+    "audiomoth-utils": "^1.0.3",
+    "bootstrap": "4.3.1",
+    "bootstrap-slider": "^10.6.2",
+    "electron-debug": "3.0.1",
+    "electron-localshortcut": "^3.2.1",
+    "electron-progressbar": "^1.2.0",
+    "jquery": "^3.5.1",
+    "jsonschema": "1.2.4",
+    "popper.js": "^1.15.0",
+    "showdown": "^1.9.1",
+    "strftime": "0.10.0"
+  },
+  "engines": {
+    "node": ">=10.16.2"
+  }
+}
