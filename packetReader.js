@@ -81,6 +81,8 @@ exports.read = (packet) => {
 
     config.disable48DCFilter = (packet[17] >> 1) & 1;
 
+    config.lowGainRangeEnabled = (packet[17] >> 2) & 1;
+
     return config;
 
 };
@@ -91,17 +93,18 @@ exports.print = (config) => {
 
     console.log('Current time: ', formatDate(config.time));
 
-    console.log('Gain:', config.gain);
-    console.log('Clock divider:', config.clockDivider);
-    console.log('Acquisition cycles:', config.acquisitionCycles);
-    console.log('Oversample rate:', config.oversampleRate);
-    console.log('Sample rate:', config.sampleRate);
-    console.log('Sample rate divider:', config.sampleRateDivider);
+    console.log('Gain: ', config.gain);
+    console.log('Clock divider: ', config.clockDivider);
+    console.log('Acquisition cycles: ', config.acquisitionCycles);
+    console.log('Oversample rate: ', config.oversampleRate);
+    console.log('Sample rate: ', config.sampleRate);
+    console.log('Sample rate divider: ', config.sampleRateDivider);
 
-    console.log('Lower filter value:', config.lowerFilterFreq);
-    console.log('Higher filter value:', config.higherFilterFreq);
+    console.log('Lower filter value: ', config.lowerFilterFreq);
+    console.log('Higher filter value: ', config.higherFilterFreq);
 
-    console.log('Energy saver mode enabled:', config.energySaverModeEnabled === 1);
-    console.log('48 Hz DC blocking filter disabled:', config.disable48DCFilter === 1);
+    console.log('Energy saver mode enabled: ', config.energySaverModeEnabled === 1);
+    console.log('48 Hz DC blocking filter disabled: ', config.disable48DCFilter === 1);
+    console.log('Low gain range enabled: ', config.lowGainRangeEnabled === 1);
 
 };

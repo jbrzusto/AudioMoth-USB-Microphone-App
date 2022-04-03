@@ -248,7 +248,7 @@ function usePacketValues () {
 
     samplerateDisplay.textContent = (config.sampleRate / config.sampleRateDivider / 1000) + 'kHz';
 
-    const gains = ['Low', 'Medium-Low', 'Medium', 'Medium-High', 'High'];
+    const gains = ['Low', 'Low-Medium', 'Medium', 'Medium-High', 'High'];
 
     gainDisplay.textContent = gains[config.gain];
 
@@ -270,23 +270,41 @@ function usePacketValues () {
 
     }
 
-    if (config.energySaverModeEnabled === 0 && config.disable48DCFilter === 0) {
+    var count = 0;
 
-        additionalDisplay.textContent = 'None';
+    var textContent = '';
 
-    } else if (config.energySaverModeEnabled === 0) {
+    if (config.disable48DCFilter === 1) {
 
-        additionalDisplay.textContent = 'Disable 48Hz DC filter';
+        textContent += 'Disable 48Hz DC filter';
 
-    } else if (config.disable48DCFilter === 0) {
-
-        additionalDisplay.textContent = 'Energy saver mode';
-
-    } else {
-
-        additionalDisplay.textContent = 'Energy saver mode / Disable 48Hz DC filter';
+        count += 1;
 
     }
+
+    if (config.energySaverModeEnabled === 1) {
+
+        if (count > 0) textContent += ' / ';
+
+        textContent += 'Energy saver mode';
+
+        count += 1;
+
+    }
+
+    if (config.lowGainRangeEnabled === 1) {
+
+        if (count > 0) textContent += ' / ';
+
+        textContent += 'Low gain range';
+
+        count += 1;
+
+    }
+
+    if (count === 0) textContent = 'None';
+
+    additionalDisplay.textContent = textContent;
 
     enablePacketDisplay();
     enableButton();
@@ -488,10 +506,9 @@ function configureDevice () {
 
     const disable48DCFilter = settings.disable48DCFilter ? 1 : 0;
 
-    let packedByte3 = energySaverModeEnabled & 1;
-    packedByte3 |= (disable48DCFilter << 1);
+    const enableLowGainRange = settings.lowGainRangeEnabled ? 1 : 0;
 
-    packet[index++] = packedByte3;
+    packet[index++] = energySaverModeEnabled | (disable48DCFilter << 1) | (enableLowGainRange << 2);
 
     console.log('Packet length: ', index);
 
