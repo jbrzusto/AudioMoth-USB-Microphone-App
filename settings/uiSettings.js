@@ -56,6 +56,7 @@ exports.getSettings = () => {
         filterTypeIndex: uiFiltering.getFilterType(),
         lowerFilter: uiFiltering.getLowerSliderValue(),
         higherFilter: uiFiltering.getHigherSliderValue(),
+        enableLED: uiAdvanced.isLEDEnabled(),
         energySaverModeEnabled: uiAdvanced.isEnergySaverModeEnabled(),
         disable48DCFilter: uiAdvanced.is48DCFilterDisabled(),
         lowGainRangeEnabled: uiAdvanced.isLowGainRangeEnabled()

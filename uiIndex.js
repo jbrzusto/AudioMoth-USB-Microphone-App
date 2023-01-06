@@ -274,7 +274,17 @@ function usePacketValues () {
 
     var textContent = '';
 
+    if (config.enableLED === 1) {
+
+        textContent += 'Enable LED';
+
+        count += 1;
+
+    }
+
     if (config.disable48DCFilter === 1) {
+
+        if (count > 0) textContent += ' / ';
 
         textContent += 'Disable 48Hz DC filter';
 
@@ -303,6 +313,8 @@ function usePacketValues () {
     }
 
     if (count === 0) textContent = 'None';
+
+    if (count === 4) textContent = 'Enable LED / Disable DC filter / Energy saver mode / Low gain range';
 
     additionalDisplay.textContent = textContent;
 
@@ -502,13 +514,15 @@ function configureDevice () {
     writeLittleEndianBytes(packet, index, 2, higherFilter);
     index += 2;
 
+    const disableLED = settings.enableLED ? 0 : 1;
+
     const energySaverModeEnabled = settings.energySaverModeEnabled ? 1 : 0;
 
     const disable48DCFilter = settings.disable48DCFilter ? 1 : 0;
 
     const enableLowGainRange = settings.lowGainRangeEnabled ? 1 : 0;
 
-    packet[index++] = energySaverModeEnabled | (disable48DCFilter << 1) | (enableLowGainRange << 2);
+    packet[index++] = energySaverModeEnabled | (disable48DCFilter << 1) | (enableLowGainRange << 2) | (disableLED << 3);
 
     console.log('Packet length: ', index);
 

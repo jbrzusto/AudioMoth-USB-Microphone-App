@@ -54,6 +54,7 @@ typedef struct {
     uint16_t higherFilterFreq;
     uint8_t enableEnergySaverMode : 1; 
     uint8_t disable48HzDCBlockingFilter : 1;
+    uint8_t disableLED : 1;
 } configSettings_t;
 
 */
@@ -83,6 +84,8 @@ exports.read = (packet) => {
 
     config.lowGainRangeEnabled = (packet[17] >> 2) & 1;
 
+    config.enableLED = (packet[17] >> 3) & 1 ? 0 : 1;
+
     return config;
 
 };
@@ -102,6 +105,8 @@ exports.print = (config) => {
 
     console.log('Lower filter value: ', config.lowerFilterFreq);
     console.log('Higher filter value: ', config.higherFilterFreq);
+
+    console.log('Enable LED: ', config.enableLED === 1);
 
     console.log('Energy saver mode enabled: ', config.energySaverModeEnabled === 1);
     console.log('48 Hz DC blocking filter disabled: ', config.disable48DCFilter === 1);
