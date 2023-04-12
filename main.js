@@ -108,7 +108,7 @@ function toggleNightMode () {
 app.on('ready', function () {
 
     const iconLocation = (process.platform === 'linux') ? '/build/icon.png' : '/build/icon.ico';
-    const windowHeight = shrinkWindowHeight(650);
+    const windowHeight = shrinkWindowHeight(661);
 
     mainWindow = new BrowserWindow({
         title: 'AudioMoth USB Microphone App',
@@ -154,25 +154,6 @@ app.on('ready', function () {
                 app.quit();
 
             }
-        }]
-    }, {
-        label: 'Edit',
-        submenu: [{
-            label: 'Cut',
-            accelerator: 'CommandOrControl+X',
-            selector: 'cut:'
-        }, {
-            label: 'Copy',
-            accelerator: 'CommandOrControl+C',
-            selector: 'copy:'
-        }, {
-            label: 'Paste',
-            accelerator: 'CommandOrControl+V',
-            selector: 'paste:'
-        }, {
-            label: 'Select All',
-            accelerator: 'CommandOrControl+A',
-            selector: 'selectAll:'
         }]
     }, {
         label: 'Help',

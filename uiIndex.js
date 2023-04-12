@@ -107,6 +107,8 @@ function requestPacket () {
 
     audiomoth.getPacket(function (err, pack) {
 
+        if (communicating) return;
+
         if (err || pack == null) {
 
             disableFirmwareDisplay();
@@ -129,6 +131,8 @@ function requestPacket () {
 function requestFirmwareVersion () {
 
     audiomoth.getFirmwareVersion(function (err, versionArr) {
+
+        if (communicating) return;
 
         if (err || versionArr === null) {
 
@@ -192,6 +196,8 @@ function requestFirmwareDescription () {
 
     audiomoth.getFirmwareDescription(function (err, description) {
 
+        if (communicating) return;
+
         if (err || description === null || description === '') {
 
             warningShown = false;
@@ -222,27 +228,17 @@ function requestFirmwareDescription () {
 
 function getAudioMothPacket () {
 
-    if (communicating) {
-
-        return;
-
-    }
+    if (communicating) return;
 
     requestFirmwareDescription();
 
-    setTimeout(getAudioMothPacket, 200);
+    setTimeout(getAudioMothPacket, 1000);
 
 }
 
 /* Fill in time/date, ID, battery state, firmware version */
 
 function usePacketValues () {
-
-    if (communicating) {
-
-        return;
-
-    }
 
     const config = packetReader.read(packet.splice(1));
 
@@ -274,17 +270,7 @@ function usePacketValues () {
 
     var textContent = '';
 
-    if (config.enableLED === 1) {
-
-        textContent += 'Enable LED';
-
-        count += 1;
-
-    }
-
     if (config.disable48DCFilter === 1) {
-
-        if (count > 0) textContent += ' / ';
 
         textContent += 'Disable 48Hz DC filter';
 
@@ -313,8 +299,6 @@ function usePacketValues () {
     }
 
     if (count === 0) textContent = 'None';
-
-    if (count === 4) textContent = 'Enable LED / Disable DC filter / Energy saver mode / Low gain range';
 
     additionalDisplay.textContent = textContent;
 

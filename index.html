@@ -70,7 +70,7 @@
                     <div class="col-12">
                         <div style="margin-left: 5px; margin-right: 4px">
                             <table class="table" style="margin-bottom: 4px;">
-                                <tr class="settings-text" style="font-size: 12px;" title="Sample rate used when making streaming samples.">
+                                <tr class="settings-text" style="font-size: 12px;" title="Sample rate used when streaming samples.">
                                     <td align="center" style="padding: 0px; padding-left: 0px;"></td>
                                     <td align="center" style="padding: 0px; padding-left: 0px;">8</td>
                                     <td align="center" style="padding: 0px; padding-left: 0px;">16</td>
@@ -93,8 +93,7 @@
                                         <input class="settings-inputs" type="radio" id="sample-rate-radio2" value="2" name="sample-rate-radio">
                                     </td>
                                     <td align="center" style="padding-top: 0px; padding-bottom: 0px">
-                                        <input class="settings-inputs" type="radio" id="sample-rate-radio3" value="3" name="sample-rate-radio"
-                                        checked>
+                                        <input class="settings-inputs" type="radio" id="sample-rate-radio3" value="3" name="sample-rate-radio">
                                     </td>
                                     <td align="center" style="padding-top: 0px; padding-bottom: 0px">
                                         <input class="settings-inputs" type="radio" id="sample-rate-radio4" value="4" name="sample-rate-radio">
@@ -106,7 +105,7 @@
                                         <input class="settings-inputs" type="radio" id="sample-rate-radio6" value="6" name="sample-rate-radio">
                                     </td>
                                     <td align="center" style="padding-top: 0px; padding-bottom: 0px">
-                                        <input class="settings-inputs" type="radio" id="sample-rate-radio6" value="7" name="sample-rate-radio">
+                                        <input class="settings-inputs" type="radio" id="sample-rate-radio6" value="7" name="sample-rate-radio" checked>
                                     </td>
                                 </tr>
                                 <tr style="height: 10px;"></tr>
@@ -144,6 +143,16 @@
                                 </tr>
                             </table>
                         </div>
+                    </div>
+                </div>
+            </div>
+            <div style="border: #cdcdcd thin solid; width: 100%; margin-top: 8px;">
+                <div class="row" style="margin-top: 8px; margin-bottom: 5px;">
+                    <div class="col-9" style="text-align: left;">
+                        <span style="margin-left: 17px;">Enable LED:</span>
+                    </div>
+                    <div class="col-3" style="text-align: right;" title="Whether to flash LED during operation in DEFAULT or CUSTOM mode.">
+                        <input id="enable-LED-checkbox" type="checkbox" style="margin-right: 16px;" checked>
                     </div>
                 </div>
             </div>
@@ -232,14 +241,6 @@
                 </div>
             </div>
             <div style="border: #cdcdcd thin solid; width: 100%; margin-top: 8px;">
-                <div class="row" style="margin-top: 8px; margin-bottom: 5px;">
-                    <div class="col-9" style="text-align: left;">
-                        <span style="margin-left: 17px;">Enable LED:</span>
-                    </div>
-                    <div class="col-3" style="text-align: right;" title="Whether to flash LED during operation in DEFAULT or CUSTOM mode.">
-                        <input id="enable-LED-checkbox" type="checkbox" style="margin-right: 16px;" checked>
-                    </div>
-                </div>
                 <div class="row" style="margin-top: 5px; margin-bottom: 5px;">
                     <div class="col-9" style="text-align: left;">
                         <span style="margin-left: 17px;">Disable 48Hz DC blocking filter:</span>
