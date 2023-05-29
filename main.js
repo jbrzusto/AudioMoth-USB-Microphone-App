@@ -108,7 +108,7 @@ function toggleNightMode () {
 app.on('ready', function () {
 
     const iconLocation = (process.platform === 'linux') ? '/build/icon.png' : '/build/icon.ico';
-    const windowHeight = shrinkWindowHeight(661);
+    const windowHeight = shrinkWindowHeight(711);
 
     mainWindow = new BrowserWindow({
         title: 'AudioMoth USB Microphone App',
