@@ -69,7 +69,11 @@ exports.configurations = [{
 exports.packetLengthVersions = [{
     firmwareVersion: '1.0.0',
     packetLength: 18
-}];
+},
+{
+    firmwareVersion: '1.2.1',
+    packetLength: 22
+}                               ];
 
 const FIRMWARE_OFFICIAL_RELEASE = 0;
 const FIRMWARE_OFFICIAL_RELEASE_CANDIDATE = 1;

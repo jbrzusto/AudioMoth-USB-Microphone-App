@@ -52,7 +52,8 @@ typedef struct {
     uint8_t sampleRateDivider;
     uint16_t lowerFilterFreq;
     uint16_t higherFilterFreq;
-    uint8_t enableEnergySaverMode : 1; 
+    uint32_t serialNumber;
+    uint8_t enableEnergySaverMode : 1;
     uint8_t disable48HzDCBlockingFilter : 1;
     uint8_t disableLED : 1;
 } configSettings_t;
@@ -78,13 +79,18 @@ exports.read = (packet) => {
     config.lowerFilterFreq = twoBytesToNumber(packet, 13);
     config.higherFilterFreq = twoBytesToNumber(packet, 15);
 
-    config.energySaverModeEnabled = packet[17] & 1;
+    config.serialNumber = "";
+    for (let i = 0; i < 4; ++i) {
+        config.serialNumber += String.fromCharCode(packet[17+i]);
+    }
 
-    config.disable48DCFilter = (packet[17] >> 1) & 1;
+    config.energySaverModeEnabled = packet[21] & 1;
 
-    config.lowGainRangeEnabled = (packet[17] >> 2) & 1;
+    config.disable48DCFilter = (packet[21] >> 1) & 1;
 
-    config.enableLED = (packet[17] >> 3) & 1 ? 0 : 1;
+    config.lowGainRangeEnabled = (packet[21] >> 2) & 1;
+
+    config.enableLED = (packet[21] >> 3) & 1 ? 0 : 1;
 
     return config;
 
@@ -105,6 +111,8 @@ exports.print = (config) => {
 
     console.log('Lower filter value: ', config.lowerFilterFreq);
     console.log('Higher filter value: ', config.higherFilterFreq);
+
+    console.log('Serial number: ', config.serialNumber);
 
     console.log('Enable LED: ', config.enableLED === 1);
 

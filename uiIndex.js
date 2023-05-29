@@ -319,6 +319,18 @@ function writeLittleEndianBytes (buffer, start, byteCount, value) {
 
 }
 
+/* Write chars from a string into a buffer for transmission.
+   For now, we only support 7-bit ascii */
+
+function writeChars (buffer, start, byteCount, src) {
+    for (let i = 0; i < byteCount; i++) {
+
+        buffer[start + i] = src.charCodeAt(i) & 0x7f;
+
+    }
+
+}
+
 /* Send configuration packet to AudioMoth */
 
 function sendPacket (packet) {
@@ -497,6 +509,9 @@ function configureDevice () {
 
     writeLittleEndianBytes(packet, index, 2, higherFilter);
     index += 2;
+
+    writeChars(packet, index, 4, settings.serialNumber);
+    index += 4;
 
     const disableLED = settings.enableLED ? 0 : 1;
 
