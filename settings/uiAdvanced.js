@@ -10,6 +10,7 @@ const enableLED = document.getElementById('enable-LED-checkbox');
 const energySaverModeCheckbox = document.getElementById('energy-saver-mode-checkbox');
 const disable48DCFilterCheckbox = document.getElementById('disable-48-dc-filter-checkbox');
 const lowGainRangeCheckbox = document.getElementById('low-gain-range-checkbox');
+const serialNumberLabel = document.getElementById('serial-number-label');
 
 exports.isLEDEnabled = () => {
 
@@ -33,4 +34,8 @@ exports.isLowGainRangeEnabled = () => {
 
     return lowGainRangeCheckbox.checked;
 
+}
+
+exports.serialNumber = () => {
+    return serialNumberLabel.value;
 }

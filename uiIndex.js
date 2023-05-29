@@ -51,13 +51,17 @@ const filterSettingLabel = document.getElementById('filter-setting-label');
 const additionalDisplay = document.getElementById('additional-display');
 const additionalLabel = document.getElementById('additional-label');
 
+const serialNumberDisplay = document.getElementById('serial-number-display');
+const serialNumberDisplayLabel = document.getElementById('serial-number-display-label');
+
 const configureButton = document.getElementById('configure-button');
 
-const packetLabels = [samplerateLabel, gainLabel, filterSettingLabel, additionalLabel];
-const packetDisplays = [samplerateDisplay, gainDisplay, filterSettingDisplay, additionalDisplay];
+const packetLabels = [samplerateLabel, gainLabel, filterSettingLabel, additionalLabel, serialNumberDisplayLabel];
+const packetDisplays = [samplerateDisplay, gainDisplay, filterSettingDisplay, additionalDisplay, serialNumberDisplay];
 
 const firmwareLabels = [firmwareVersionLabel, firmwareDescriptionLabel];
 const firmwareDisplays = [firmwareVersionDisplay, firmwareDescriptionDisplay];
+
 
 /* Store version number for packet size checks and description for compatibility check */
 
@@ -301,6 +305,8 @@ function usePacketValues () {
     if (count === 0) textContent = 'None';
 
     additionalDisplay.textContent = textContent;
+
+    serialNumberDisplay.textContent = config.serialNumber;
 
     enablePacketDisplay();
     enableButton();
