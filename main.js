@@ -79,6 +79,10 @@ function openAboutWindow () {
 
         mainWindow.webContents.send('poll-night-mode');
 
+        /* DEBUG
+        mainWindow.webContents.toggleDevTools();
+        */
+
     });
 
     ipcMain.on('night-mode-poll-reply', (e, nightMode) => {
@@ -108,7 +112,11 @@ function toggleNightMode () {
 app.on('ready', function () {
 
     const iconLocation = (process.platform === 'linux') ? '/build/icon.png' : '/build/icon.ico';
-    const windowHeight = shrinkWindowHeight(711);
+    const windowHeight = shrinkWindowHeight(686);
+
+    /* global device ID; received from a device, and sent in packets */
+
+    globalThis.devID = [0, 0];
 
     mainWindow = new BrowserWindow({
         title: 'AudioMoth USB Microphone App',
@@ -117,6 +125,10 @@ app.on('ready', function () {
         useContentSize: true,
         resizable: false,
         fullscreenable: false,
+        /* DEBUG
+        resizable: true,
+        fullscreenable: true,
+        */
         icon: path.join(__dirname, iconLocation),
         webPreferences: {
             nodeIntegration: true

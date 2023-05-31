@@ -59,8 +59,7 @@ exports.getSettings = () => {
         enableLED: uiAdvanced.isLEDEnabled(),
         energySaverModeEnabled: uiAdvanced.isEnergySaverModeEnabled(),
         disable48DCFilter: uiAdvanced.is48DCFilterDisabled(),
-        lowGainRangeEnabled: uiAdvanced.isLowGainRangeEnabled(),
-        serialNumber: uiAdvanced.serialNumber()
+        lowGainRangeEnabled: uiAdvanced.isLowGainRangeEnabled()
     };
 
     return settings;

@@ -72,7 +72,7 @@ exports.packetLengthVersions = [{
 },
 {
     firmwareVersion: '1.2.1',
-    packetLength: 22
+    packetLength: 26
 }                               ];
 
 const FIRMWARE_OFFICIAL_RELEASE = 0;

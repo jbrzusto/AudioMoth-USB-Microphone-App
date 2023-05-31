@@ -51,13 +51,13 @@ const filterSettingLabel = document.getElementById('filter-setting-label');
 const additionalDisplay = document.getElementById('additional-display');
 const additionalLabel = document.getElementById('additional-label');
 
-const serialNumberDisplay = document.getElementById('serial-number-display');
-const serialNumberDisplayLabel = document.getElementById('serial-number-display-label');
+const devidDisplay = document.getElementById('devid-display');
+const devidDisplayLabel = document.getElementById('devid-display-label');
 
 const configureButton = document.getElementById('configure-button');
 
-const packetLabels = [samplerateLabel, gainLabel, filterSettingLabel, additionalLabel, serialNumberDisplayLabel];
-const packetDisplays = [samplerateDisplay, gainDisplay, filterSettingDisplay, additionalDisplay, serialNumberDisplay];
+const packetLabels = [samplerateLabel, gainLabel, filterSettingLabel, additionalLabel, devidDisplayLabel];
+const packetDisplays = [samplerateDisplay, gainDisplay, filterSettingDisplay, additionalDisplay, devidDisplay];
 
 const firmwareLabels = [firmwareVersionLabel, firmwareDescriptionLabel];
 const firmwareDisplays = [firmwareVersionDisplay, firmwareDescriptionDisplay];
@@ -306,11 +306,15 @@ function usePacketValues () {
 
     additionalDisplay.textContent = textContent;
 
-    serialNumberDisplay.textContent = config.serialNumber;
+    devidDisplay.textContent = hexify(globalThis.devID[1]) + hexify(globalThis.devID[0])
 
     enablePacketDisplay();
     enableButton();
 
+}
+
+function hexify (num) {
+    return num.toString(16).toUpperCase().padStart(8, '0')
 }
 
 /* Write bytes into a buffer for transmission */
@@ -516,9 +520,6 @@ function configureDevice () {
     writeLittleEndianBytes(packet, index, 2, higherFilter);
     index += 2;
 
-    writeChars(packet, index, 4, settings.serialNumber);
-    index += 4;
-
     const disableLED = settings.enableLED ? 0 : 1;
 
     const energySaverModeEnabled = settings.energySaverModeEnabled ? 1 : 0;
@@ -528,6 +529,13 @@ function configureDevice () {
     const enableLowGainRange = settings.lowGainRangeEnabled ? 1 : 0;
 
     packet[index++] = energySaverModeEnabled | (disable48DCFilter << 1) | (enableLowGainRange << 2) | (disableLED << 3);
+
+    /* Write the device id; this doesn't actually change the device's ID, but simplifies the code on that side */
+    writeLittleEndianBytes(packet, index, 4, globalThis.devID[0]);
+    index += 4;
+
+    writeLittleEndianBytes(packet, index, 4, globalThis.devID[1]);
+    index += 4;
 
     console.log('Packet length: ', index);
 
